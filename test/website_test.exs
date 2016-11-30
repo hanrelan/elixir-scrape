@@ -12,7 +12,7 @@ defmodule WebsiteTest do
   test "parser works" do
     html = sample_website "venturebeat"
     data = Website.parse html, "http://venturebeat.com"
-    assert data.title == "VentureBeat" 
+    assert data.title == "VentureBeat | Tech News That Matters"
     assert data.description == "VentureBeat is the leading source for news & perspective on tech innovation. We give context to help execs, entrepreneurs, & tech enthusiasts make smart decisions."
     assert data.image == nil # DRAGON: needs algorithm update
     assert data.favicon == "http://venturebeat.com/wp-content/themes/vbnews/img/favicon.ico"
@@ -24,7 +24,7 @@ defmodule WebsiteTest do
   test "parser works with german" do
     html = sample_website "ntv"
     data = Website.parse html, "http://example.com"
-    assert data.title == "Nachrichten, aktuelle Schlagzeilen und Videos"
+    assert data.title == "Nachrichten, aktuelle Schlagzeilen und Videos - n-tv.de"
     assert data.description == "Nachrichten seriös, schnell und kompetent. Artikel und Videos aus Politik, Wirtschaft, Börse, Sport und News aus aller Welt."
     assert data.image == nil # DRAGON: needs algorithm update
     assert data.favicon == "http://www.n-tv.de/resources/ts24099052/ver1-0/responsive/img/touch/apple-touch-icon-144x144-precomposed.png"
@@ -36,7 +36,7 @@ defmodule WebsiteTest do
   test "parser works with german ISO site" do
     html = sample_website "spiegel"
     data = Website.parse html, "http://example.com"
-    assert data.title == "Nachrichten"
+    assert data.title == "Nachrichten - SPIEGEL ONLINE"
     assert data.description == "Deutschlands führende Nachrichtenseite. Alles Wichtige aus Politik, Wirtschaft, Sport, Kultur, Wissenschaft, Technik und mehr."
     assert data.image == nil # DRAGON: needs algorithm update
     assert data.favicon == "http://www.spiegel.de/static/sys/v10/icons/touch-icon-iphone.png"
