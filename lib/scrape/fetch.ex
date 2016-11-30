@@ -5,9 +5,9 @@ defmodule Scrape.Fetch do
     recv_timeout: 30_000
   ]
 
-  def run(url) do
+  def run(url, httpoison_opts \\ []) do
     url
-    |> HTTPoison.get([], @opts)
+    |> HTTPoison.get([], Dict.merge(@opts, httpoison_opts))
     |> evaluate
   end
 

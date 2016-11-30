@@ -4,26 +4,23 @@ defmodule Scrape do
   alias Scrape.Website
   alias Scrape.Article
 
-  def feed(url, :minimal) do
-    url
-    |> Fetch.run
-    |> Feed.parse_minimal
+  def feed(url, type \\ :not_minimal, httpoison_opts \\ []) do
+    html = Fetch.run(url, httpoison_opts)
+    if type == :minimal do
+      Feed.parse_minimal(html)
+    else
+      Feed.parse(html)
+    end
   end
 
-  def feed(url) do
+  def website(url, httpoison_opts \\ []) do
     url
-    |> Fetch.run
-    |> Feed.parse(url)
-  end
-
-  def website(url) do
-    url
-    |> Fetch.run
+    |> Fetch.run(httpoison_opts)
     |> Website.parse(url)
   end
 
-  def article(url) do
-    html = Fetch.run url
+  def article(url, httpoison_opts \\ []) do
+    html = Fetch.run url, httpoison_opts
     website = Website.parse(html, url)
     Article.parse(website, html)
   end
